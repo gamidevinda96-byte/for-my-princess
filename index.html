@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Princess 💖</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    perspective: 1500px;
+}
+
+/* 3D flip */
+.flip-container {
+    width: 340px;
+    height: 400px;
+}
+
+.flip-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 1.2s ease;
+}
+
+.flip-card.flip {
+    transform: rotateY(180deg);
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 25px;
+    padding: 28px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    backface-visibility: hidden;
+    text-align: center;
+}
+
+.front h1 {
+    color: #ff3366;
+}
+
+.back {
+    transform: rotateY(180deg);
+    color: #ff3366;
+}
+
+/* buttons */
+button {
+    padding: 12px 28px;
+    margin: 12px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.yes {
+    background: #ff3366;
+    color: white;
+}
+
+.no {
+    background: #ddd;
+    position: absolute;
+}
+
+/* hearts */
+.heart {
+    position: absolute;
+    color: white;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* fireworks */
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: gold;
+    border-radius: 50%;
+    animation: boom 1s ease-out forwards;
+}
+
+@keyframes boom {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(6); opacity: 0; }
+}
+
+/* kitty hug animation */
+.kitty {
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+    animation: hug 1.5s infinite;
+}
+
+@keyframes hug {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+.heart-pop {
+    font-size: 40px;
+    animation: pop 1.2s infinite;
+}
+
+@keyframes pop {
+    0% { opacity: 0; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-15px); }
+    100% { opacity: 0; transform: translateY(-30px); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="flip-container">
+    <div class="flip-card" id="flipCard">
+
+        <!-- FRONT -->
+        <div class="card front">
+            <h1>Will you be my Valentine? 💕</h1>
+            <p><strong>My Princess 💖</strong></p>
+
+            <button class="yes" onclick="yesClick()">Yes 💖</button>
+            <button class="no" id="noBtn">No 😢</button>
+        </div>
+
+        <!-- BACK -->
+        <div class="card back">
+            <h1>Happy Valentine’s Day 💖</h1>
+            <h2>My Princess Palingu 💕</h2>
+
+            <!-- Real hugging kitty sticker -->
+            <img src="3e3681cf-f498-4474-9a58-a124e09e92e6.png" class="kitty" alt="Hugging Kitty">
+
+            <div class="heart-pop">💖</div>
+
+            <p>
+                From <strong>Gamitha</strong> 💌<br>
+                A big warm hug just for you 🫂✨
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<!-- 🎵 PERFECT SONG (plays after YES) -->
+<div id="song" style="display:none;">
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/2Vv-BfVoq4g?autoplay=1&loop=1&playlist=2Vv-BfVoq4g"
+allow="autoplay">
+</iframe>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const flipCard = document.getElementById("flipCard");
+
+// NO button runs away
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 220 - 110;
+    const y = Math.random() * 180 - 90;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+function yesClick() {
+    flipCard.classList.add("flip");
+    document.getElementById("song").style.display = "block";
+    fireworks();
+}
+
+// hearts background
+setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = Math.random() * 20 + 10 + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 6000);
+}, 300);
+
+// fireworks 🎆
+function fireworks() {
+    for (let i = 0; i < 35; i++) {
+        const f = document.createElement("div");
+        f.className = "firework";
+        f.style.left = Math.random() * 100 + "vw";
+        f.style.top = Math.random() * 100 + "vh";
+        document.body.appendChild(f);
+        setTimeout(() => f.remove(), 1000);
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
